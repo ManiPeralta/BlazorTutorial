@@ -1,0 +1,40 @@
+﻿@page "/employeedetails/{id}"
+@page "/employeedetails/"
+@inherits EmployeeDetailsBase
+
+<h3>Emplyee Details</h3>
+
+@if(Employee == null){
+    <div class="spinner-border spinner-border-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+    <div class="spinner-grow spinner-grow-sm" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+}
+else
+{
+    <div class="card-deck">
+        <div class="card text-center" style="min-width:18rem; max-width:50.5%;float:left; margin:0 auto;">
+            <div class="card-header">
+                @Employee.FirstName @Employee.LastName @Coordinates
+            </div>
+            <div class="card-body">
+                @*<img src="@Employee.PhotoPath" style="width:100%;" @onmousemove="@Mouse_Move" />*@
+                <img src="@Employee.PhotoPath" style="width:100%;" @onmousemove="@(e => Coordinates = $"X: {e.ClientX}, Y: {e.ClientY}")" />
+                <h4>Employee ID: @Employee.EmployeeId</h4>
+                <h4>Emmail: @Employee.Email</h4>
+                <h4>Department: @(Employee.Department == null ? "n/a" : @Employee.Department.DepartmentName)</h4>
+
+                <button class="btn btn-primary" @onclick="@Button_Click">@ButtonText</button>
+            </div>
+            <div class="card-footer text-muted @CssClass">
+                <a href="/" class="btn btn-primary">View</a>
+                <a href="" class="btn btn-primary">Edit</a>
+                <a href="" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+}
+// Next video 25
+https://www.youtube.com/watch?v=RRFKk2rGuug&list=PL6n9fhu94yhVowClAs8-6nYnfsOTma14P&index=25
