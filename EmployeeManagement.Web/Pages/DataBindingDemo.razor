@@ -1,0 +1,39 @@
+﻿@page "/databindingdemo"
+@inherits DataBindingDemoBase
+
+<h3>Data Binding Demo</h3>
+
+<h3>One way data inding</h3>
+
+<div>
+    <b>Name : @Name</b>
+</div>
+<div>
+    <b>Name with salutation: </b> @(Gender == "Male" ? $"Mr: {Name}" : $"Mrs: {Name}")
+</div>
+
+<div>
+    <b>Name: </b> <input type="text" value="@Name" />
+</div>
+<br/>
+<h3>Two way binding</h3>
+<div>
+    <b>Name: </b> <input type="text" value="@Name" @onchange="@(e => {Name = e.Value.ToString();})" />
+</div>
+
+<div>
+    <b>Name: </b> <input @bind="Name" />
+</div>
+
+<div>
+    <b>Name: </b> <input @bind="Name" @bind:event="oninput" /> @Name.Count()
+</div>
+
+<div>
+    <b>Colour: </b> <input @bind="Colour" />
+</div>
+<div @bind-style="Colour" @bind-style:event="onchange">
+    <h4>The background colour of this text changes</h4>
+</div>
+
+@*https://www.youtube.com/watch?v=Ii7QwHdD0oU&list=PL6n9fhu94yhVowClAs8-6nYnfsOTma14P&index=27*@

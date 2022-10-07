@@ -1,7 +1,10 @@
 ﻿@page "/"
 @inherits EmployeeListBase
 
-<h3>Employee List</h3>
+<h3>Selected Employee Count - @SelectEmployeeCount</h3>
+
+<input type="checkbox" id="showFooter" @bind="ShowFooter" />
+<label for="showFooter">Show Footer</label>
 
 @if(Employees == null){
     <div class="spinner-border spinner-border-sm" role="status">
@@ -16,19 +19,8 @@ else
     <div class="card-deck">
         @foreach (var employee in Employees)
         {
-            <div class="card text-center" style="min-width:18rem; max-width:30.5%;float:left; margin-right:10px;margin-bottom:10px;">
-                <div class="card-header">
-                    @employee.FirstName @employee.LastName @employee.EmployeeId
-                </div>
-                <div class="card-body">
-                    <img src="@employee.PhotoPath" style="width:100%;" />
-                </div>
-                <div class="card-footer text-muted">
-                    <a href="@($"employeedetails/{employee.EmployeeId}")" class="btn btn-primary">View</a>
-                    <a href="" class="btn btn-primary">Edit</a>
-                    <a href="" class="btn btn-danger">Delete</a>
-                </div>
-            </div>
+            <DisplayEmployee Employee="employee" ShowFooter="ShowFooter" 
+                OnEmployeeSelection="EmployeeSelectionChanged"></DisplayEmployee>
         }
     </div>
 }

@@ -30,7 +30,7 @@ namespace EmployeeManagement.Web.Pages
         //}
 
         public string ButtonText { get; set; } = "Hide Footer";
-        public string CssClass { get; set; } = null;
+        public string? CssClass { get; set; } = null;
 
         protected void Button_Click()
         {
